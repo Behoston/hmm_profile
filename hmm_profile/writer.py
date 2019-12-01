@@ -5,8 +5,18 @@ import typing
 from hmm_profile import models
 
 
-def save_to_file(hmm: models.HMM, output: pathlib.Path) -> pathlib.Path:
-    with output.open('w') as f:
+def save_many_to_file(
+        hmms: typing.List[models.HMM],
+        output: typing.Union[pathlib.Path, str],
+) -> typing.Union[pathlib.Path, str]:
+    with open(output, 'w') as f:
+        for hmm in hmms:
+            f.writelines(get_lines(hmm))
+    return output
+
+
+def save_to_file(hmm: models.HMM, output: typing.Union[pathlib.Path, str]) -> typing.Union[pathlib.Path, str]:
+    with open(output, 'w') as f:
         f.writelines(get_lines(hmm))
     return output
 
