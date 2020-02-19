@@ -18,8 +18,13 @@ with open(path.join(this_directory, 'test_requirements.txt')) as f:
         if require:
             test_requirements.append(require)
 
+if sys.version_info < (3, 7):
+    install_requires = ['dataclasses']
+else:
+    install_requires = []
+
 setup(
-    name='HMM profile',
+    name='hmm_profile',
     packages=find_packages(exclude=['tests']),
     version='0.0.1',
     url='https://github.com/Behoston/hmm_profile',
@@ -31,9 +36,11 @@ setup(
     long_description_content_type='text/markdown',
     py_modules=['hmm_profile'],
     include_package_data=True,
+    install_requires=install_requires,
     tests_require=test_requirements,
     setup_requires=['pytest-runner'] if needs_pytest else [],
     platforms='any',
+    python_requires='>=3.6',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Environment :: Other Environment',
@@ -44,6 +51,7 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
         'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
         'Programming Language :: Python :: 3.7',
         'Programming Language :: Python :: 3.8',
         'Topic :: Education',
