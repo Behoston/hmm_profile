@@ -2,6 +2,10 @@
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](./LICENSE)
 [![Actions Status](https://github.com/Behoston/hmm_profile/workflows/Test/badge.svg)](https://github.com/Behoston/hmm_profile/actions?query=workflow%3ATest)
+[![Wheel Status](https://img.shields.io/pypi/wheel/hmm-profile)](https://pypi.python.org/pypi/hmm-profile/)
+[![Supported Python versions](https://img.shields.io/pypi/pyversions/hmm-profile)](https://pypi.python.org/pypi/hmm-profile/)
+[![PyPI - Status](https://img.shields.io/pypi/status/hmm-profile)](https://pypi.python.org/pypi/hmm-profile/)
+[![Latest version](https://img.shields.io/pypi/v/hmm-profile)](https://pypi.python.org/pypi/hmm-profile/)
 
 Hidden Markov Model profile toolkit. 
 
