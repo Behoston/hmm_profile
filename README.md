@@ -100,3 +100,16 @@ If you have a file that is not readable or has some glitches on save, please cra
 
 In the near future, I will implement the periodic task, that will be testing if all hmm profiles
 from Pfam are readable and writable without errors.
+
+
+## Development
+
+### Release
+
+1. Update changelog
+2. Change version in [./setup.py](setup.py)
+3. Release on github using same version
+
+**Important:** Releases always runs on `master` on CI/CD!
+
+I will try to simplify this and remove step 2 or 3.
