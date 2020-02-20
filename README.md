@@ -106,10 +106,7 @@ from Pfam are readable and writable without errors.
 
 ### Release
 
-1. Update changelog
-2. Change version in [./setup.py](setup.py)
-3. Release on github using same version
-
-**Important:** Releases always runs on `master` on CI/CD!
-
-I will try to simplify this and remove step 2 or 3.
+```bash
+pip install zest.releaser
+fullrelease
+```
