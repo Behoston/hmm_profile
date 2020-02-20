@@ -1,4 +1,4 @@
-0.0.5 (unreleased)
+0.0.5 (2020-02-20)
 ------------------
 
 - Auto release from github.
