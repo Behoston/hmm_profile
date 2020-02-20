@@ -1,4 +1,4 @@
-0.0.6 (unreleased)
+0.0.6 (2020-02-20)
 ------------------
 
 - Add wheel to release.
