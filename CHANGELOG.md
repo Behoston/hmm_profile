@@ -1,7 +1,7 @@
 0.0.4 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Set development status to Alpha.
 
 
 0.0.3 (2020-02-20)
