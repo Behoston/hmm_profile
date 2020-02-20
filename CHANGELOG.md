@@ -1,7 +1,7 @@
 0.0.6 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Add wheel to release.
 
 
 0.0.5 (2020-02-20)
