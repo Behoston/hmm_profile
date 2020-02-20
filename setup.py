@@ -26,7 +26,7 @@ else:
 setup(
     name='hmm_profile',
     packages=find_packages(exclude=['tests']),
-    version='0.0.4',
+    version='0.0.5.dev0',
     url='https://github.com/Behoston/hmm_profile',
     license='MIT',
     author='Behoston',
