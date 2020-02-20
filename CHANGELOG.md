@@ -1,4 +1,4 @@
-0.0.4 (unreleased)
+0.0.4 (2020-02-20)
 ------------------
 
 - Set development status to Alpha.
