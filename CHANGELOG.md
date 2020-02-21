@@ -1,8 +1,16 @@
 0.0.7 (unreleased)
 ------------------
 
-- Nothing changed yet.
-
+- Added model for statistical data.
+- Added crosscheck test (load -> save -> load and compare if both loaded model are same).
+- Added full database test (all hmm profiles from Pfam).
+- Fixed read emission line for start step.
+- Added save method with opened file (or file-like object) as parameter.
+- Fixed saving RF line (boolean value was false/true instead of no/yes).
+- Added saving statistical lines
+- Added saving build command
+- Added saving search command
+- Added saving additional data in emission line
 
 0.0.6 (2020-02-20)
 ------------------

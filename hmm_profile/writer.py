@@ -17,7 +17,12 @@ def save_many_to_file(
 
 def save_to_file(hmm: models.HMM, output: typing.Union[pathlib.Path, str]) -> typing.Union[pathlib.Path, str]:
     with open(output, 'w') as f:
-        f.writelines(get_lines(hmm))
+        save_to_writable(hmm, f)
+    return output
+
+
+def save_to_writable(hmm: models.HMM, output: typing.IO) -> typing.IO:
+    output.writelines(get_lines(hmm))
     return output
 
 
@@ -41,7 +46,7 @@ def metadata_lines(metadata: models.Metadata) -> typing.Generator[str, None, Non
     yield f'LENG  {metadata.length}\n'
     yield f'ALPH  {metadata.alphabet_type.value}\n'
     if metadata.reference_annotation is not None:
-        yield f'RF    {metadata.reference_annotation}\n'
+        yield f'RF    {bool_to_str(metadata.reference_annotation)}\n'
     if metadata.model_masked is not None:
         yield f'MM    {bool_to_str(metadata.model_masked)}\n'
     yield f'CONS  {bool_to_str(metadata.consensus_residue_annotation)}\n'
@@ -66,12 +71,23 @@ def metadata_lines(metadata: models.Metadata) -> typing.Generator[str, None, Non
     if metadata.noise_cutoff:
         a, b = metadata.noise_cutoff
         yield f'NC    {a:.2f} {b:.2f};\n'
-    # TODO:
-    # yield f'BM    \n'
-    # yield f'SM    \n'
-    # yield f'STATS \n'
-    # yield f'STATS \n'
-    # yield f'STATS \n'
+    if metadata.build_command is not None:
+        yield f'BM    {metadata.build_command}\n'
+    if metadata.search_command is not None:
+        yield f'SM    {metadata.search_command}\n'
+    if metadata.statistical_parameters:
+        for statistical_parameter in metadata.statistical_parameters:
+            yield from statistical_line(statistical_parameter)
+
+
+def statistical_line(statistical_parameter: models.StatisticalParameter) -> typing.Generator[str, None, None]:
+    yield (
+        f'STATS '
+        f'{statistical_parameter.alignment_mode_configuration:<5} '
+        f'{statistical_parameter.score_distribution_name:<9} '
+        f'{float_to_str(statistical_parameter.location):<8} '
+        f'{float_to_str(statistical_parameter.slope):<8}\n'
+    )
 
 
 def model_headers() -> typing.Generator[str, None, None]:
@@ -108,8 +124,15 @@ def step_lines(line_number: int, step: models.Step) -> typing.Generator[str, Non
         float_to_str(convert_probability(step.p_deletion_to_deletion)),
     ])
     emission_values = ''.join([float_to_str(convert_probability(x)) for x in step.p_emission_char])
+    emission_additional_data = (
+        f'{step.alignment_column_index if step.alignment_column_index is not None else "-":>7} '
+        f'{step.consensus_residue_annotation if step.consensus_residue_annotation else "-"} '
+        f'{step.reference_annotation if step.reference_annotation else "-"} '
+        f'{step.mask_value if step.mask_value else "-"} '
+        f'{step.annotation if step.annotation else "-"}'
+    )
     insertion_values = ''.join([float_to_str(convert_probability(x)) for x in step.p_insertion_char])
-    yield f'{line_number:>7} {emission_values}\n'
+    yield f'{line_number:>7} {emission_values}{emission_additional_data}\n'
     yield '        {}\n'.format(insertion_values)
     yield '        {}\n'.format(state_switch_values)
 

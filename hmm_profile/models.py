@@ -38,9 +38,17 @@ class Metadata:
     gathering_threshold: typing.Optional[typing.Tuple[float, float]] = None
     trusted_cutoff: typing.Optional[typing.Tuple[float, float]] = None
     noise_cutoff: typing.Optional[typing.Tuple[float, float]] = None
-    statistical_parameters: typing.Optional[typing.List[typing.Tuple[str, str, float, float]]] = None
+    statistical_parameters: typing.Optional[typing.List['StatisticalParameter']] = None
     build_command: typing.Optional[str] = None
     search_command: typing.Optional[str] = None
+
+
+@dataclasses.dataclass
+class StatisticalParameter:
+    alignment_mode_configuration: str
+    score_distribution_name: str
+    location: float
+    slope: float
 
 
 @dataclasses.dataclass
@@ -82,3 +90,14 @@ class HMM:
             if sum([p >= minimum_equality for p in step.p_emission_char]) >= how_many_min_chars:
                 result += 1
         return result
+
+    def __eq__(self, other):
+        if not isinstance(other, HMM):
+            return False
+        else:
+            assert self.metadata == other.metadata, other.metadata
+            return all([
+                self.metadata == other.metadata,
+                self.start_step == other.start_step,
+                self.steps == other.steps,
+            ])

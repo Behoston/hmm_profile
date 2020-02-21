@@ -40,9 +40,9 @@ def test_one_real_life_example(caplog):
     assert metadata.trusted_cutoff == (21.10, 21.10)
     assert metadata.noise_cutoff == (21.0, 21.0)
     assert metadata.statistical_parameters == [
-        ('LOCAL', 'MSV', -7.4476, 0.71948),
-        ('LOCAL', 'VITERBI', -7.8642, 0.71948),
-        ('LOCAL', 'FORWARD', -4.32, 0.71948),
+        models.StatisticalParameter('LOCAL', 'MSV', -7.4476, 0.71948),
+        models.StatisticalParameter('LOCAL', 'VITERBI', -7.8642, 0.71948),
+        models.StatisticalParameter('LOCAL', 'FORWARD', -4.32, 0.71948),
     ]
     assert metadata.build_command == 'hmmbuild HMM.ann SEED.ann'
     assert metadata.search_command == 'hmmsearch -Z 45638612 -E 1000 --cpu 4 HMM pfamseq'
