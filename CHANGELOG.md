@@ -1,6 +1,7 @@
 0.0.7 (unreleased)
 ------------------
 
+- Enable periodic tests for all Pfam hmm profiles.
 - Enable mypy.
 - Enabled isort.
 - Added model for statistical data.

@@ -1,0 +1,26 @@
+name: Full database test
+on:
+  schedule:
+    - cron: '25 23 * * *'
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.6, 3.7, 3.8]
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install -U hmm_profile pytest
+          mkdir /tmp/tests/
+          cp ./tests/test_full_db.py /tmp/tests/
+      - name: Test
+        working-directory: /tmp/tests/
+        run: |
+          HMM_PROFILE_RUN_INTEGRITY_TESTS=TRUE pytest

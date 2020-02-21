@@ -122,8 +122,10 @@ def _parse_bool(value: str) -> bool:
         raise Exception(f"Cannot parse bool value: {value}.")
 
 
-def parse_steps(f: typing.IO, alphabet: typing.List[str]) -> typing.Generator[
-    typing.Union[models.StartStep, models.Step], None, None]:
+def parse_steps(
+        f: typing.IO,
+        alphabet: typing.List[str],
+) -> typing.Generator[typing.Union[models.StartStep, models.Step], None, None]:
     alphabet_length = len(alphabet)
     while True:
         emission_line = f.readline().strip()
