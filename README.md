@@ -98,9 +98,19 @@ If you have a file that is not readable or has some glitches on save, please cra
 
 ## Guarantees
 
-In the near future, I will implement the periodic task, that will be testing if all hmm profiles
-from Pfam are readable and writable without errors.
+[![Full database test](https://github.com/Behoston/hmm_profile/workflows/Full%20database%20test/badge.svg)](https://github.com/Behoston/hmm_profile/actions?query=workflow%3A%22Full+database+test%22)
 
+Above you can see if all hmm models from Pfam works. Test are running every day. 
+
+Test flow:
+
+1. Download all hmm models from Pfam.
+2. Load models sequentially.
+3. Write model to file.
+4. Load saved model from file.
+5. Check if both loaded models are equals.
+
+For this test the latest version of `hmm_profile` from pypi is used. 
 
 ## Development
 
