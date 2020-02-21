@@ -27,6 +27,7 @@ jobs:
           # stop the build if there are Python syntax errors or undefined names
           flake8 . --count --show-source --statistics
           isort -c
+          mypy ./hmm_profile/
       - name: Test with pytest
         run: |
           python setup.py test

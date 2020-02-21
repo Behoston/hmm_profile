@@ -17,7 +17,7 @@ def read_all(f: typing.TextIO) -> typing.Generator[models.HMM, None, None]:
 
 def read_single(f: typing.TextIO) -> models.HMM:
     metadata = parse_metadata(f)
-    steps = list(parse_steps(f, metadata.alphabet))
+    steps: typing.List[models.Step] = list(parse_steps(f, metadata.alphabet))  # type: ignore
     start_step = None
     if isinstance(steps[0], models.StartStep):
         start_step = steps[0]
@@ -27,7 +27,7 @@ def read_single(f: typing.TextIO) -> models.HMM:
 
 def parse_metadata(f) -> models.Metadata:  # noqa: C901
     version = _parse_version(f)
-    metadata_dict = {'version_identifier': version}
+    metadata_dict: typing.Dict[str, typing.Any] = {'version_identifier': version}
     statistical_parameters: typing.List[models.StatisticalParameter] = []
     for line in f:
         tag, unparsed_value = line.strip().split(maxsplit=1)
@@ -122,7 +122,8 @@ def _parse_bool(value: str) -> bool:
         raise Exception(f"Cannot parse bool value: {value}.")
 
 
-def parse_steps(f, alphabet: typing.List[str]) -> typing.Generator[models.Step, None, None]:
+def parse_steps(f: typing.IO, alphabet: typing.List[str]) -> typing.Generator[
+    typing.Union[models.StartStep, models.Step], None, None]:
     alphabet_length = len(alphabet)
     while True:
         emission_line = f.readline().strip()

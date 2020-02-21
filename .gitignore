@@ -4,3 +4,4 @@ hmm_profile.egg-info/
 dist/
 build/
 *.pyc
+.mypy_cache/

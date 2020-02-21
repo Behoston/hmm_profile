@@ -26,7 +26,7 @@ class Metadata:
     accession_number: typing.Optional[str] = None
     description: typing.Optional[str] = None
     max_instance_length: typing.Optional[int] = None
-    reference_annotation: typing.Optional[str] = None
+    reference_annotation: typing.Optional[bool] = None
     model_masked: bool = False
     consensus_structure_annotation: bool = False
     map_annotation: bool = False
