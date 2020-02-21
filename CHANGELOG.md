@@ -1,6 +1,7 @@
 0.0.7 (unreleased)
 ------------------
 
+- Enabled isort.
 - Added model for statistical data.
 - Added crosscheck test (load -> save -> load and compare if both loaded model are same).
 - Added full database test (all hmm profiles from Pfam).

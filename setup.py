@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 import sys
+
 from os import path
 
 from setuptools import find_packages

@@ -22,10 +22,11 @@ jobs:
           python -m pip install --upgrade pip
           pip install -r test_requirements.txt
           pip install -e .
-      - name: Lint with flake8
+      - name: Static analysis
         run: |
           # stop the build if there are Python syntax errors or undefined names
           flake8 . --count --show-source --statistics
+          isort -c
       - name: Test with pytest
         run: |
           python setup.py test
