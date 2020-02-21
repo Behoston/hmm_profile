@@ -1,4 +1,4 @@
-0.0.7 (unreleased)
+0.0.7 (2020-02-21)
 ------------------
 
 - Enable periodic tests for all Pfam hmm profiles.
