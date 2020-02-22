@@ -19,11 +19,6 @@ with open(path.join(this_directory, 'test_requirements.txt')) as f:
         if require:
             test_requirements.append(require)
 
-if sys.version_info < (3, 7):
-    install_requires = ['dataclasses']
-else:
-    install_requires = []
-
 setup(
     name='hmm_profile',
     packages=find_packages(exclude=['tests']),
@@ -37,7 +32,7 @@ setup(
     long_description_content_type='text/markdown',
     py_modules=['hmm_profile'],
     include_package_data=True,
-    install_requires=install_requires,
+    install_requires=['dataclasses;python_version<"3.7"'],
     tests_require=test_requirements,
     setup_requires=['pytest-runner'] if needs_pytest else [],
     platforms='any',

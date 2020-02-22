@@ -1,7 +1,7 @@
 0.0.8 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix wheel for Python 3.6.
 
 
 0.0.7 (2020-02-21)
