@@ -30,6 +30,8 @@ jobs:
           isort -c
           mypy ./hmm_profile/
       - name: Test with pytest
+        env:
+          HMM_PROFILE_RUN_INTEGRITY_TESTS: TRUE
         run: |
           python setup.py test
   release:

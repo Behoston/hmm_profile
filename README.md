@@ -112,6 +112,8 @@ Test flow:
 
 For this test the latest version of `hmm_profile` from pypi is used. 
 
+Full DB test also runs before each release, but badge above shows only periodic tests results.
+
 ## Development
 
 ### Release

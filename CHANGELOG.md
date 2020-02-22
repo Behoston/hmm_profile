@@ -1,7 +1,7 @@
 0.0.9 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Enable all tests before release.
 
 
 0.0.8 (2020-02-22)
