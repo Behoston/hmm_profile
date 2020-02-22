@@ -1,7 +1,7 @@
 name: Full database test
 on:
   schedule:
-    - cron: '56 23 * * *'
+    - cron: '28 16 * * *'
 jobs:
   test:
     runs-on: ubuntu-latest
