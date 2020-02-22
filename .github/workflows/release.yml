@@ -33,7 +33,7 @@ jobs:
         env:
           HMM_PROFILE_RUN_INTEGRITY_TESTS: TRUE
         run: |
-          python setup.py test
+          python setup.py test --addopts -s
   release:
     runs-on: ubuntu-latest
     needs: test

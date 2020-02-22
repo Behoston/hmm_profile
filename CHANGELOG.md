@@ -1,8 +1,9 @@
 0.0.9 (unreleased)
 ------------------
 
-- Enable all tests before release.
-
+- Added benchmark result display in tests.
+- Benchmark package on python 3.6 and 3.7.
+- Show benchmark results in cronjob and release workflows.
 
 0.0.8 (2020-02-22)
 ------------------

@@ -23,4 +23,6 @@ jobs:
       - name: Test
         working-directory: /tmp/tests/
         run: |
-          HMM_PROFILE_RUN_INTEGRITY_TESTS=TRUE pytest
+           pytest -s
+        env:
+          HMM_PROFILE_RUN_INTEGRITY_TESTS: TRUE

@@ -29,7 +29,7 @@ But you can use an underlying function to get file content directly without savi
 #### Read all hmm from file
 
 The `read_all` function returns generator to optimise memory usage - 
-it's a common pattern that one file contains many models.
+it's a common pattern that one file contains many profiles.
 
 
 ```python
@@ -39,7 +39,7 @@ from hmm_profile import reader
 with open('/your/hmm/profile/file.hmm') as f:
     model_generator = reader.read_all(f)  # IMPORTANT: returns generator
 
-models = list(model_generator)
+profiles = list(model_generator)
 
 ```
 
@@ -58,15 +58,15 @@ with open('/your/hmm/profile/file.hmm') as f:
 
 ### Writer
 
-#### Write multiple models to single file 
+#### Write multiple profiles to single file 
 
 ```python
 from hmm_profile import writer
 
-models = [...]
+profiles = [...]
 path = '/your/hmm/profile/file.hmm'
 
-writer.save_many_to_file(hmms=models, output=path)
+writer.save_many_to_file(hmms=profiles, output=path)
 ```
 
 #### Write single model to file
@@ -100,19 +100,55 @@ If you have a file that is not readable or has some glitches on save, please cra
 
 [![Full database test](https://github.com/Behoston/hmm_profile/workflows/Full%20database%20test/badge.svg)](https://github.com/Behoston/hmm_profile/actions?query=workflow%3A%22Full+database+test%22)
 
-Above you can see if all hmm models from Pfam works. Test are running every day. 
+Above you can see if all hmm profiles from Pfam works. Test are running every day. 
 
 Test flow:
 
-1. Download all hmm models from Pfam.
-2. Load models sequentially.
+1. Download all hmm profiles from Pfam.
+2. Load profiles sequentially.
 3. Write model to file.
 4. Load saved model from file.
-5. Check if both loaded models are equals.
+5. Check if both loaded profiles are equals.
 
 For this test the latest version of `hmm_profile` from pypi is used. 
 
 Full DB test also runs before each release, but badge above shows only periodic tests results.
+
+## Performance
+
+Whole package is written in pure Python, without C extensions. 
+
+You can treat full DB test as benchmark.
+
+Benchmark should be depended mainly on single core of CPU and secondarily on storage and eventually on RAM.
+Storage is used only for read from then files will be saved to "in-memory file" (StringIO).
+
+Remember: Results may vary when CPU is under load.
+Also, hmm profiles in db can be modified in future or some profiles may be added/removed from DB.
+
+
+|          Processor       |          Storage          | Time [s] | Profiles |    Date    | Version | Python  |
+|--------------------------|---------------------------|----------|----------|------------|---------|---------|
+| Intel Core i7-4702MQ     | Crucial MX500 500 GB      |   342    |   17928  | 2020.02.22 |  0.0.9  |   3.7   |
+| Intel Core i7-4702MQ     | Crucial MX500 500 GB      |   322    |   17928  | 2020.02.22 |  0.0.9  |   3.6   |
+| Intel Core i7-4702MQ     | GoodRAM Iridium Pro240 GB |   TBA    |   TBA    |     TBA    |   TBA   |   3.6   |
+
+
+To run benchmark:
+
+```bash
+pip install .
+export HMM_PROFILE_RUN_INTEGRITY_TESTS=TRUE
+python setpu.py test --addopts -s
+```
+
+Run test at least 3 times if you want to share results (last line) and close as much process as possible. 
+**Important:** do not run tests inside so-called terminal in IDE - 
+it will do much more job with output and benchmark result will be affected. 
+
+
+As you can see python 3.6 is a little faster, 
+probably due to different implementation of backported dataclasses, but I'm not sure.
 
 ## Development
 
