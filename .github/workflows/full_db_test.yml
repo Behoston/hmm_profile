@@ -1,7 +1,7 @@
 name: Full database test
 on:
   schedule:
-    - cron: '28 16 * * *'
+    - cron: '33 19 * * *'
 jobs:
   test:
     runs-on: ubuntu-latest
@@ -25,4 +25,4 @@ jobs:
         run: |
            pytest -s
         env:
-          HMM_PROFILE_RUN_INTEGRITY_TESTS: TRUE
+          HMM_PROFILE_RUN_INTEGRITY_TESTS: 'TRUE'

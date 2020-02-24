@@ -1,6 +1,7 @@
 0.0.9 (unreleased)
 ------------------
 
+- Fix set variable uppercase in workflows.
 - Added benchmark result display in tests.
 - Benchmark package on python 3.6 and 3.7.
 - Show benchmark results in cronjob and release workflows.
