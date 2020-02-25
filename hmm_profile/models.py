@@ -78,26 +78,8 @@ class StartStep(BaseStep):
     pass
 
 
+@dataclasses.dataclass
 class HMM:
-    def __init__(self, metadata: Metadata, steps: typing.List[Step], start_step: typing.Optional[StartStep] = None):
-        self.metadata = metadata
-        self.start_step = start_step
-        self.steps = steps
-
-    def check_equal_states(self, minimum_equality: float, how_many_min_chars: int = 2) -> int:
-        result = 0
-        for step in self.steps:
-            if sum([p >= minimum_equality for p in step.p_emission_char]) >= how_many_min_chars:
-                result += 1
-        return result
-
-    def __eq__(self, other):
-        if not isinstance(other, HMM):
-            return False
-        else:
-            assert self.metadata == other.metadata, other.metadata
-            return all([
-                self.metadata == other.metadata,
-                self.start_step == other.start_step,
-                self.steps == other.steps,
-            ])
+    metadata: Metadata
+    steps: typing.List[Step]
+    start_step: typing.Optional[StartStep] = None

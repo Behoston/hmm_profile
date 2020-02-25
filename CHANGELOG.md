@@ -1,6 +1,8 @@
 0.0.9 (unreleased)
 ------------------
 
+- Make HMM model class dataclass.
+- Removed unused method from HMM model class.
 - Fix set variable uppercase in workflows.
 - Added benchmark result display in tests.
 - Benchmark package on python 3.6 and 3.7.
