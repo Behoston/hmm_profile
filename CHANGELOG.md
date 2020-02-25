@@ -1,4 +1,4 @@
-0.0.9 (unreleased)
+0.0.9 (2020-02-25)
 ------------------
 
 - Make HMM model class dataclass.
