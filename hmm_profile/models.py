@@ -60,8 +60,8 @@ class BaseStep:
     p_insertion_to_insertion: float
     p_deletion_to_emission: float
     p_deletion_to_deletion: float
-    p_emission_char: typing.List[float]
-    p_insertion_char: typing.List[float]
+    p_emission_char: typing.Dict[str, float]
+    p_insertion_char: typing.Dict[str, float]
 
 
 @dataclasses.dataclass

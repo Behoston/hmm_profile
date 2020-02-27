@@ -30,9 +30,9 @@ def get_lines(hmm: models.HMM) -> typing.Generator[str, None, None]:
     yield from metadata_lines(hmm.metadata)
     yield from model_headers()
     if hmm.start_step is not None:
-        yield from compo_lines(hmm.start_step)
+        yield from compo_lines(hmm.start_step, hmm.metadata.alphabet)
     for i, step in enumerate(hmm.steps, start=1):
-        yield from step_lines(i, step)
+        yield from step_lines(i, step, hmm.metadata.alphabet)
     yield from last_line()
 
 
@@ -96,7 +96,7 @@ def model_headers() -> typing.Generator[str, None, None]:
     yield '            m->m     m->i     m->d     i->m     i->i     d->m     d->d\n'
 
 
-def compo_lines(start_step: models.StartStep) -> typing.Generator[str, None, None]:
+def compo_lines(start_step: models.StartStep, alphabet: typing.List[str]) -> typing.Generator[str, None, None]:
     state_switch_values = ''.join([
         float_to_str(convert_probability(start_step.p_emission_to_emission)),
         float_to_str(convert_probability(start_step.p_emission_to_insertion)),
@@ -106,14 +106,18 @@ def compo_lines(start_step: models.StartStep) -> typing.Generator[str, None, Non
         float_to_str(convert_probability(start_step.p_deletion_to_emission)),
         float_to_str(convert_probability(start_step.p_deletion_to_deletion)),
     ])
-    insertion_values = ''.join([float_to_str(convert_probability(x)) for x in start_step.p_insertion_char])
-    emission_values = ''.join([float_to_str(convert_probability(x)) for x in start_step.p_emission_char])
+    insertion_values = ''.join([
+        float_to_str(convert_probability(start_step.p_insertion_char[char])) for char in alphabet
+    ])
+    emission_values = ''.join([
+        float_to_str(convert_probability(start_step.p_emission_char[char])) for char in alphabet
+    ])
     yield f'  COMPO {emission_values}\n'
     yield f'        {insertion_values}\n'
     yield f'        {state_switch_values}\n'
 
 
-def step_lines(line_number: int, step: models.Step) -> typing.Generator[str, None, None]:
+def step_lines(line_number: int, step: models.Step, alphabet: typing.List[str]) -> typing.Generator[str, None, None]:
     state_switch_values = ''.join([
         float_to_str(convert_probability(step.p_emission_to_emission)),
         float_to_str(convert_probability(step.p_emission_to_insertion)),
@@ -123,7 +127,7 @@ def step_lines(line_number: int, step: models.Step) -> typing.Generator[str, Non
         float_to_str(convert_probability(step.p_deletion_to_emission)),
         float_to_str(convert_probability(step.p_deletion_to_deletion)),
     ])
-    emission_values = ''.join([float_to_str(convert_probability(x)) for x in step.p_emission_char])
+    emission_values = ''.join([float_to_str(convert_probability(step.p_emission_char[char])) for char in alphabet])
     emission_additional_data = (
         f'{step.alignment_column_index if step.alignment_column_index is not None else "-":>7} '
         f'{step.consensus_residue_annotation if step.consensus_residue_annotation else "-"} '
@@ -131,7 +135,7 @@ def step_lines(line_number: int, step: models.Step) -> typing.Generator[str, Non
         f'{step.mask_value if step.mask_value else "-"} '
         f'{step.annotation if step.annotation else "-"}'
     )
-    insertion_values = ''.join([float_to_str(convert_probability(x)) for x in step.p_insertion_char])
+    insertion_values = ''.join([float_to_str(convert_probability(step.p_insertion_char[char])) for char in alphabet])
     yield f'{line_number:>7} {emission_values}{emission_additional_data}\n'
     yield '        {}\n'.format(insertion_values)
     yield '        {}\n'.format(state_switch_values)

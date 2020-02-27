@@ -148,8 +148,14 @@ def parse_steps(
                 p_insertion_to_insertion=convert_probability(state_switch_line[4]),
                 p_deletion_to_emission=convert_probability(state_switch_line[5]),
                 p_deletion_to_deletion=convert_probability(state_switch_line[6]),
-                p_emission_char=[convert_probability(p) for p in emission_line[1:]],
-                p_insertion_char=[convert_probability(p) for p in insertion_line],
+                p_emission_char=dict(zip(
+                    alphabet,
+                    [convert_probability(p) for p in emission_line[1:]],
+                )),
+                p_insertion_char=dict(zip(
+                    alphabet,
+                    [convert_probability(p) for p in insertion_line],
+                )),
             )
         else:
             # TODO: assert next line numbers
@@ -165,8 +171,14 @@ def parse_steps(
                 p_insertion_to_insertion=convert_probability(state_switch_line[4]),
                 p_deletion_to_emission=convert_probability(state_switch_line[5]),
                 p_deletion_to_deletion=convert_probability(state_switch_line[6]),
-                p_emission_char=[convert_probability(p) for p in emission_line[1:-5]],
-                p_insertion_char=[convert_probability(p) for p in insertion_line],
+                p_emission_char=dict(zip(
+                    alphabet,
+                    [convert_probability(p) for p in emission_line[1:-5]],
+                )),
+                p_insertion_char=dict(zip(
+                    alphabet,
+                    [convert_probability(p) for p in insertion_line],
+                )),
                 alignment_column_index=None if emission_line[-5] == '-' else int(emission_line[-5]),
                 consensus_residue_annotation=None if emission_line[-4] == '-' else emission_line[-4],
                 reference_annotation=None if emission_line[-3] == '-' else emission_line[-3],

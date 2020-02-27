@@ -1,7 +1,7 @@
 0.0.10 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Change step model: now emission and insertion probabilities are dict with char as key and probability as value.
 
 
 0.0.9 (2020-02-25)
