@@ -1,7 +1,8 @@
 0.0.11 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Added py.typed.
+- Unify writing methods.
 
 
 0.0.10 (2020-02-27)

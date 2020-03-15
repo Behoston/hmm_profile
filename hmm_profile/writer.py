@@ -11,7 +11,7 @@ def save_many_to_file(
 ) -> typing.Union[pathlib.Path, str]:
     with open(output, 'w') as f:
         for hmm in hmms:
-            f.writelines(get_lines(hmm))
+            save_to_writable(hmm, f)
     return output
 
 

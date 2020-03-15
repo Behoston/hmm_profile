@@ -18,12 +18,6 @@ With my package you can read and write hmm profile files.
 It's easy to use and easy to read - the best documentation is a well-written code itself,
 so don't be scared about reading source code.
 
-I decided to use an already opened file as a function parameter,
-due to file can come from different places, not only local drive.
-
-For a writer's functions, I decided to use local file.
-But you can use an underlying function to get file content directly without saving to file.
-
 ### Reader
 
 #### Read all hmm from file

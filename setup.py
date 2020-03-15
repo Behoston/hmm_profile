@@ -32,6 +32,7 @@ setup(
     long_description_content_type='text/markdown',
     py_modules=['hmm_profile'],
     include_package_data=True,
+    package_data={'hmm_profile': ["py.typed"]},
     install_requires=['dataclasses;python_version<"3.7"'],
     tests_require=test_requirements,
     setup_requires=['pytest-runner'] if needs_pytest else [],
