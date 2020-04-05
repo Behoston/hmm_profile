@@ -5,6 +5,7 @@ on:
       - '\d+\.\d+\.\d+'
 jobs:
   test:
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     strategy:
       matrix:

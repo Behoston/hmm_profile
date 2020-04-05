@@ -4,6 +4,7 @@ on:
     - cron: '33 19 * * *'
 jobs:
   test:
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     strategy:
       matrix:
