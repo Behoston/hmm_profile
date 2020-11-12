@@ -1,7 +1,8 @@
 0.0.12 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Minor fixes on CI.
+- Add official support for Python 3.9
 
 
 0.0.11 (2020-03-15)

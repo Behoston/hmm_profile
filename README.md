@@ -148,7 +148,8 @@ probably due to different implementation of backported dataclasses, but I'm not 
 
 ### Release
 
-1. Change version in setup.py to `x.y.z.dev0` and ensure changelog is up to date.
+1. Change version in setup.py to `x.y.z.dev0` (or leave if minor version bump) and ensure changelog is up to date.
+(`Nothing changed yet.` is not ok, CI will fail)
 2. Tag head of master branch with `x.y.z` without `.dev0`
 
 **Important**: release ALWAYS is from master branch! So keep master untouched when you want to release.
