@@ -1,7 +1,7 @@
 0.0.13 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Update test requirements. 
 
 
 0.0.12 (2020-11-12)
