@@ -1,7 +1,8 @@
 0.0.13 (unreleased)
 -------------------
 
-- Update test requirements. 
+- Add official support for Python 3.10
+- Update testing packages
 
 
 0.0.12 (2020-11-12)
