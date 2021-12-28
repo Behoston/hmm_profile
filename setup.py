@@ -22,7 +22,7 @@ with open(path.join(this_directory, 'test_requirements.txt')) as f:
 setup(
     name='hmm_profile',
     packages=find_packages(exclude=['tests']),
-    version='0.0.13',
+    version='0.0.14.dev0',
     url='https://github.com/Behoston/hmm_profile',
     license='MIT',
     author='Behoston',
