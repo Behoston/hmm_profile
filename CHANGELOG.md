@@ -1,4 +1,4 @@
-0.0.13 (unreleased)
+0.0.13 (2021-12-28)
 -------------------
 
 - Add official support for Python 3.10
