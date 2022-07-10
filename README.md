@@ -120,20 +120,27 @@ Storage is used only for read from then files will be saved to "in-memory file" 
 Remember: Results may vary when CPU is under load.
 Also, hmm profiles in db can be modified in future or some profiles may be added/removed from DB.
 
+`D` - means test was done in Docker container with `slim` version of Python.
 
-|          Processor       |          Storage          | Time [s] | Profiles |    Date    | Version | Python  |
-|--------------------------|---------------------------|----------|----------|------------|---------|---------|
-| Intel Core i7-4702MQ     | Crucial MX500 500 GB      |   342    |   17928  | 2020.02.22 |  0.0.9  |   3.7   |
-| Intel Core i7-4702MQ     | Crucial MX500 500 GB      |   322    |   17928  | 2020.02.22 |  0.0.9  |   3.6   |
-| Intel Core i7-4702MQ     | GoodRAM Iridium Pro240 GB |   TBA    |   TBA    |     TBA    |   TBA   |   3.6   |
-
+| Processor            | Storage                   | Time [s] | Profiles | Date       | Version | Python         |
+|----------------------|---------------------------|----------|----------|------------|---------|----------------|
+| Intel Core i7-4702MQ | Crucial MX500 500 GB      | 322      | 17928    | 2020.02.22 | 0.0.9   | 3.6            |
+| Intel Core i7-4702MQ | Crucial MX500 500 GB      | 342      | 17928    | 2020.02.22 | 0.0.9   | 3.7            |
+| AMD Ryzen 5 3600     | AData XPG SX8200 1TB      | 217      | 19631    | 2022.06.28 | 0.0.13  | 3.9            |
+| AMD Ryzen 5 3600     | AData XPG SX8200 1TB      | 216      | 19632    | 2022.07.10 | 0.0.13  | 3.10           |
+| AMD Ryzen 5 3600     | AData XPG SX8200 1TB      | 265      | 19632    | 2022.07.10 | 0.0.13  | 3.11.0b3       |
+| AMD Ryzen 5 3600     | AData XPG SX8200 1TB      | 354      | 19632    | 2022.07.10 | 0.0.13  | 3.7 **D**      |
+| AMD Ryzen 5 3600     | AData XPG SX8200 1TB      | 330      | 19632    | 2022.07.10 | 0.0.13  | 3.8 **D**      |
+| AMD Ryzen 5 3600     | AData XPG SX8200 1TB      | 336      | 19631    | 2022.07.09 | 0.0.13  | 3.9 **D**      |
+| AMD Ryzen 5 3600     | AData XPG SX8200 1TB      | 253      | 19632    | 2022.07.10 | 0.0.13  | 3.10 **D**     |
+| AMD Ryzen 5 3600     | AData XPG SX8200 1TB      | 218      | 19632    | 2022.07.10 | 0.0.13  | 3.11.0b3 **D** |
 
 To run benchmark:
 
 ```bash
 pip install .
 export HMM_PROFILE_RUN_INTEGRITY_TESTS=TRUE
-python setpu.py test --addopts -s
+python setup.py test --addopts -s
 ```
 
 Run test at least 3 times if you want to share results (last line) and close as much process as possible. 
@@ -148,7 +155,7 @@ probably due to different implementation of backported dataclasses, but I'm not 
 
 ### Release
 
-1. Change version in setup.py to `x.y.z.dev0` (or leave if minor version bump) and ensure changelog is up to date.
+1. Change version in setup.py to `x.y.z.dev0` (or leave if minor version bump) and ensure changelog is up-to-date.
 (`Nothing changed yet.` is not ok, CI will fail)
 2. Tag head of master branch with `x.y.z` without `.dev0`
 
