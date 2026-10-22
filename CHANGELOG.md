@@ -1,7 +1,11 @@
 0.0.14 (unreleased)
 -------------------
 
-- Nothing changed yet.
+- Add support for Python 3.11, 3.12, 3.13 and 3.14
+- Drop support for Python 3.7, 3.8 and 3.9
+- Move all packaging and tooling configuration to `pyproject.toml` (removed `setup.py`, `setup.cfg` and `MANIFEST.in`)
+- Replace `python setup.py test` with plain `pytest` in CI
+- Replace `test_requirements.in` with the `dev` extra in `pyproject.toml`
 
 
 0.0.13 (2021-12-28)

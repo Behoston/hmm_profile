@@ -1,0 +1,81 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "hmm_profile"
+version = "0.0.14.dev0"
+description = "Hidden Markov Model profile tools (reader/writer/data structures)"
+readme = "README.md"
+requires-python = ">=3.10"
+license = {text = "MIT"}
+authors = [
+    {name = "Behoston", email = "mlegiecki@gmail.com"},
+]
+keywords = ["hmm", "hmmer", "profile", "bioinformatics"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Environment :: Other Environment",
+    "Intended Audience :: Education",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Natural Language :: English",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Topic :: Education",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+    "Topic :: Software Development",
+    "Typing :: Typed",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "flake8",
+    "flake8-builtins",
+    "flake8-coding",
+    "flake8-commas",
+    "flake8-pyproject",
+    "isort",
+    "mypy",
+    "pep8-naming",
+    "pytest",
+]
+
+[project.urls]
+Homepage = "https://github.com/Behoston/hmm_profile"
+Source = "https://github.com/Behoston/hmm_profile"
+Tracker = "https://github.com/Behoston/hmm_profile/issues"
+
+[tool.setuptools]
+packages = ["hmm_profile"]
+include-package-data = true
+platforms = ["any"]
+
+[tool.setuptools.package-data]
+hmm_profile = ["py.typed"]
+
+[tool.flake8]
+max-complexity = 5
+max-line-length = 120
+no-accept-encodings = true
+
+[tool.isort]
+force_single_line = true
+line_length = 120
+lines_between_types = 1
+
+[tool.pytest.ini_options]
+markers = [
+    "slow: marks tests as slow (deselect with '-m \"not slow\"')",
+]
+
+[tool.zest-releaser]
+create-wheel = true
