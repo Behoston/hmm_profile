@@ -4,34 +4,6 @@ on:
     tags:
       - '\d+\.\d+\.\d+'
 jobs:
-  download-database:
-    timeout-minutes: 30
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v7
-        with:
-          ref: master
-      - name: Set up Python
-        uses: actions/setup-python@v7
-        with:
-          python-version: '3.14'
-      - name: Install
-        run: |
-          python -m pip install --upgrade pip
-          pip install pytest
-          pip install -e .
-      - name: Download Pfam database
-        run: |
-          mkdir -p /tmp/hmm-profile-database
-          python -m tests.test_full_db --output /tmp/hmm-profile-database/Pfam-A.hmm.gz
-      - name: Upload Pfam database
-        uses: actions/upload-artifact@v7
-        with:
-          name: pfam-a-hmm
-          path: /tmp/hmm-profile-database/Pfam-A.hmm.gz
-          compression-level: 0
-          retention-days: 1
   test:
     timeout-minutes: 15
     runs-on: ubuntu-latest
@@ -48,11 +20,6 @@ jobs:
         uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Download Pfam database
-        uses: actions/download-artifact@v8
-        with:
-          name: pfam-a-hmm
-          path: /tmp/hmm-profile-database
       - name: Install
         run: |
           python -m pip install --upgrade pip
