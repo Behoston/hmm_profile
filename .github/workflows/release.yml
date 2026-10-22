@@ -33,8 +33,7 @@ jobs:
           compression-level: 0
           retention-days: 1
   test:
-    timeout-minutes: 30
-    needs: download-database
+    timeout-minutes: 15
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -44,6 +43,7 @@ jobs:
         uses: actions/checkout@v7
         with:
           ref: master
+          lfs: 'true'
       - name: Set up Python
         uses: actions/setup-python@v7
         with:
