@@ -104,6 +104,27 @@ For this test the latest version of `hmm_profile` from pypi is used.
 
 Full DB test also runs before each release, but badge above shows only periodic tests results.
 
+### Database file
+
+The database is downloaded only when it is not available locally:
+
+- already downloaded file - set `HMM_PROFILE_ALL_HMM_FILE` environment variable to its path,
+- cached file - `Pfam-A.hmm.gz` is stored in `~/.cache/hmm_profile/` (change the directory with the
+  `HMM_PROFILE_CACHE_DIR` environment variable) and reused by the next test run.
+
+```bash
+export HMM_PROFILE_ALL_HMM_FILE=/path/to/Pfam-A.hmm.gz
+```
+
+The file can also be downloaded manually (it is reused if it already exists):
+
+```bash
+python -m tests.test_full_db --output /path/to/Pfam-A.hmm.gz
+```
+
+In CI the file is downloaded once, before the test matrix starts, and passed to all Python versions
+as a workflow artifact.
+
 ## Performance
 
 Whole package is written in pure Python, without C extensions.
@@ -139,6 +160,8 @@ pip install .
 export HMM_PROFILE_RUN_INTEGRITY_TESTS=TRUE
 pytest -s
 ```
+
+The database file is downloaded only if it is not available locally (see [Database file](#database-file)).
 
 Run test at least 3 times if you want to share results (last line) and close as much process as possible. **Important:**
 do not run tests inside so-called terminal in IDE -
