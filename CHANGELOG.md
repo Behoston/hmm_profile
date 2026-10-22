@@ -6,9 +6,7 @@
 - Move all packaging and tooling configuration to `pyproject.toml` (removed `setup.py`, `setup.cfg` and `MANIFEST.in`)
 - Replace `python setup.py test` with plain `pytest` in CI
 - Replace `test_requirements.in` with the `dev` extra in `pyproject.toml`
-- Reuse already downloaded Pfam database in the full database test (cache directory or
-  `HMM_PROFILE_ALL_HMM_FILE` environment variable)
-- Download the Pfam database once in CI and pass it to all Python versions (instead of downloading it in every test job)
+- Add Pfam databse to LFS
 
 
 0.0.13 (2021-12-28)
