@@ -1,9 +1,0 @@
-flake8
-flake8-builtins
-flake8-coding
-flake8-commas
-isort
-mypy
-pep8-naming
-pytest
-pytest-runner
