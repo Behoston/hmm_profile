@@ -3,8 +3,34 @@ on:
   schedule:
     - cron: '33 19 * * *'
 jobs:
+  download-database:
+    timeout-minutes: 30
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v7
+      - name: Set up Python
+        uses: actions/setup-python@v7
+        with:
+          python-version: '3.14'
+      - name: Install
+        run: |
+          python -m pip install --upgrade pip
+          pip install pytest
+          pip install -e .
+      - name: Download Pfam database
+        run: |
+          mkdir -p /tmp/hmm-profile-database
+          python -m tests.test_full_db --output /tmp/hmm-profile-database/Pfam-A.hmm.gz
+      - name: Upload Pfam database
+        uses: actions/upload-artifact@v7
+        with:
+          name: pfam-a-hmm
+          path: /tmp/hmm-profile-database/Pfam-A.hmm.gz
+          compression-level: 0
+          retention-days: 1
   test:
-    timeout-minutes: 15
+    timeout-minutes: 30
+    needs: download-database
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -15,6 +41,11 @@ jobs:
         uses: actions/setup-python@v7
         with:
           python-version: ${{ matrix.python-version }}
+      - name: Download Pfam database
+        uses: actions/download-artifact@v8
+        with:
+          name: pfam-a-hmm
+          path: /tmp/hmm-profile-database
       - name: Install
         run: |
           python -m pip install --upgrade pip
@@ -23,7 +54,8 @@ jobs:
           cp ./tests/test_full_db.py /tmp/tests/
       - name: Test
         working-directory: /tmp/tests/
-        run: |
-          pytest -s
         env:
           HMM_PROFILE_RUN_INTEGRITY_TESTS: 'TRUE'
+          HMM_PROFILE_ALL_HMM_FILE: /tmp/hmm-profile-database/Pfam-A.hmm.gz
+        run: |
+          pytest -s
